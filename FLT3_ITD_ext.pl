@@ -82,7 +82,7 @@ my $refindex = "FLT3_dna_e14e15";
 
 # THESE COMMANDS OR FILES NEED TO BE IN $PATH; OTHERWISE CHANGE TO THEIR FULL PATHNAME 
 my $samcmd = "samtools";
-my $bedcmd = "bamToFastq";
+my $bedcmd = "bedtools bamtofastq";
 my $bwacmd = "bwa";
 my $clustercmd = "sumaclust";
 my $javacmd = "java"; # the java cmd needs to be in $PATH (e.g. "/apps/java/jdk1.8.0_191/bin/java";)
@@ -1648,7 +1648,7 @@ if( $proc_index && system( sprintf( "%s index -p %s %s", $bwacmd, $refindex, $re
 }
 
 if( system( sprintf( "%s mem -k %s -M -O 6 -T %s %s %s %s | grep FLT3_dna_e14e15 > %s_%s.sam", 
-	$bwacmd, $bwaSeedLength, $bwaThreshold, $refindex, $fastq1, $fastq2, $fbase, $alignerLocal ) ) ) {
+	$bwacmd, $bwaSeedLength, $bwaThreshold, $reffasta, $fastq1, $fastq2, $fbase, $alignerLocal ) ) ) {
   die "Failed to locally align initial reads to targeted FLT3 locus. Exiting...\n";
 }
 
@@ -1844,7 +1844,7 @@ if( scalar( keys %clipsfastq ) > 0 ) {
 
   # Local alignment of clips to reference
   if( system( sprintf( "%s mem -k %s -M -O 6 -T %s %s %s_clips.fastq > %s_clips.%s.sam", 
-	$bwacmd, $bwaClipsSeedLength, $bwaClipsThreshold, $refindex , $fbase, $fbase, $alignerClips ) ) ) {
+	$bwacmd, $bwaClipsSeedLength, $bwaClipsThreshold, $reffasta, $fbase, $fbase, $alignerClips ) ) ) {
     die "Error locally aligning clips to FLT3 target locus.  Exiting...";
   }
 
@@ -2024,7 +2024,7 @@ close FI;
 
 # Alignment of candidate ITD clusters against reference
 if( system( sprintf( "%s mem -M -O 6 -T 20 %s %s_candidate_clusters.fa > %s_candidate_clusters_%s.sam", 
-	$bwacmd, $refindex , $fbase, $fbase, $alignerExts ) ) ) {
+	$bwacmd, $reffasta, $fbase, $fbase, $alignerExts ) ) ) {
   die "Error aligning extended reads to target FLT3 locus. Exiting...";
 }
 
@@ -2100,7 +2100,7 @@ close FO;
 
 # Align middles (inserts) against FLT3_reference to characterize
 if( system( sprintf( "%s mem -k 10 -M -O 6 -T 10 %s %s_candidate_clusters_middle.fa > %s_candidate_clusters_middle_%s.sam", 
-	$bwacmd, $refindex , $fbase, $fbase, $alignerMiddle ) ) ) {
+	$bwacmd, $reffasta, $fbase, $fbase, $alignerMiddle ) ) ) {
   die "Error aligning middles (inserts) against FLT3 target locus. Exiting...";
 }
 
