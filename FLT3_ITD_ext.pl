@@ -120,7 +120,7 @@ open (FI, $reffasta ) or die $!;
 while(<FI>) { if( !/^>/ ) { chomp; $refseq .= $_; } }
 close FI;
 
-my $alignerLocal  = "bwa";  # "bwa" or "novo" or "bowtie2"
+my $alignerLocal  = "bwa";  # "bwa" or "novo" or "bowtie2" 
 my $alignerClips  = "bwa";  # used for aligning softclips to reference
 my $alignerExts   = "bwa";  # used for aligning extended reads to reference (bowtie2 is better at global)
 my $alignerMiddle = "bwa";  # used for aligning middle portion of extended reads to reference (local alignment)
