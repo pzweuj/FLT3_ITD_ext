@@ -1643,7 +1643,7 @@ if( $adapter ) {
 }
 
 # Local alignments to reference
-if( $proc_index && system( sprintf( "%s index -p %s %s", $bwacmd, $refindex, $reffasta ) ) ) {
+if( $proc_index && system( sprintf( "%s index %s", $bwacmd, $reffasta ) ) ) {
   die "Failed to create bwa index for reference.  Exiting...\n" ;
 }
 
