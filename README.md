@@ -31,7 +31,7 @@ Changes:
 8. Fix for missing MC tags in WT and Mut BAMs (thanks to jnktsj)
 
 Before running perl script for first time:
-1. Create a bwa index for the FLT3 target locus from the provided fasta file ("bwa index -p FLT3_dna_e1415 FLT3_dna_e14e15.fa") and modify script to provide path of the index if necessary (variable $refindex).
+1. Create a bwa index for the FLT3 target locus from the provided fasta file ("bwa index FLT3_dna_e14e15.fa") and modify script to provide path of the index if necessary (variable $refindex).
 2. Download following software tools as needed and add to path (or modify script with paths): bwa, samtools, sumaclust, fgbio, bbduk, bedtools, java.
 
 ## License
